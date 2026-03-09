@@ -1,0 +1,1878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NHC — 30 · 60 · 90 Day Execution Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:    #0B1929;
+  --navy2:   #132338;
+  --teal:    #1C7A8C;
+  --teal2:   #25A0B8;
+  --teal3:   #E0F4F7;
+  --gold:    #C07D2A;
+  --gold2:   #E4A84C;
+  --gold3:   #FDF4E7;
+  --cream:   #F8F4EF;
+  --white:   #FFFFFF;
+  --text:    #1E2E3D;
+  --muted:   #6B7E8F;
+  --border:  #DDE6EB;
+  --d30:     #1C7A8C;
+  --d60:     #C07D2A;
+  --d90:     #3B6E4A;
+  --d30bg:   #E0F4F7;
+  --d60bg:   #FDF4E7;
+  --d90bg:   #EAF3EC;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+/* ── HEADER ─────────────────────────────────────────────────── */
+.site-header {
+  background: var(--navy);
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+}
+
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.header-logo {
+  width: 34px; height: 34px;
+  background: var(--teal);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.header-logo span {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px; font-weight: 700;
+  color: white; letter-spacing: -0.5px;
+}
+
+.header-name {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.6);
+  text-transform: uppercase;
+}
+
+.header-nav {
+  display: flex;
+  gap: 6px;
+}
+
+.nav-pill {
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+}
+
+.nav-pill.d30 { color: var(--teal2); border: 1px solid rgba(28,122,140,0.4); }
+.nav-pill.d60 { color: var(--gold2); border: 1px solid rgba(192,125,42,0.4); }
+.nav-pill.d90 { color: #6DB880; border: 1px solid rgba(59,110,74,0.4); }
+.nav-pill:hover { background: rgba(255,255,255,0.08); }
+
+/* ── HERO ───────────────────────────────────────────────────── */
+.hero {
+  background: var(--navy);
+  padding: 72px 40px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -200px; right: -150px;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(28,122,140,0.18) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -100px; left: 20%;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(192,125,42,0.1) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: var(--teal2);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(44px, 6vw, 72px);
+  color: white;
+  line-height: 1.0;
+  margin-bottom: 24px;
+  font-weight: 600;
+}
+
+.hero h1 em {
+  color: var(--gold2);
+  font-style: italic;
+}
+
+.hero-sub {
+  font-size: 16px;
+  color: rgba(255,255,255,0.55);
+  max-width: 600px;
+  line-height: 1.65;
+  margin-bottom: 48px;
+}
+
+.phase-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.phase-card {
+  border-radius: 12px;
+  padding: 24px 28px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.phase-card.p30 { background: rgba(28,122,140,0.15); border-color: rgba(28,122,140,0.3); }
+.phase-card.p60 { background: rgba(192,125,42,0.12); border-color: rgba(192,125,42,0.25); }
+.phase-card.p90 { background: rgba(59,110,74,0.12); border-color: rgba(59,110,74,0.25); }
+
+.phase-card-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.p30 .phase-card-label { color: var(--teal2); }
+.p60 .phase-card-label { color: var(--gold2); }
+.p90 .phase-card-label { color: #6DB880; }
+
+.phase-card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  color: white;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.phase-card p {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.55;
+}
+
+/* ── PHASE SECTIONS ─────────────────────────────────────────── */
+.phase-section {
+  padding: 72px 40px;
+  border-top: 1px solid var(--border);
+}
+
+.phase-section.alt { background: white; }
+
+.phase-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.phase-header {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 28px;
+  align-items: start;
+  margin-bottom: 52px;
+}
+
+.phase-badge {
+  width: 72px; height: 72px;
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.p30 .phase-badge { background: var(--teal); }
+.p60 .phase-badge { background: var(--gold); }
+.p90 .phase-badge { background: #3B6E4A; }
+
+.phase-badge-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 30px;
+  font-weight: 700;
+  color: white;
+  line-height: 1;
+}
+
+.phase-badge-unit {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.7);
+  text-transform: uppercase;
+}
+
+.phase-title-block {}
+
+.phase-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.p30 .phase-eyebrow { color: var(--teal); }
+.p60 .phase-eyebrow { color: var(--gold); }
+.p90 .phase-eyebrow { color: #3B6E4A; }
+
+.phase-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 3.5vw, 42px);
+  color: var(--navy);
+  font-weight: 600;
+  line-height: 1.15;
+  margin-bottom: 10px;
+}
+
+.phase-desc {
+  font-size: 15px;
+  color: var(--muted);
+  max-width: 680px;
+  line-height: 1.65;
+}
+
+/* ── FOCUS AREA ─────────────────────────────────────────────── */
+.focus-area {
+  margin-bottom: 44px;
+}
+
+.focus-area-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.focus-icon {
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px;
+  flex-shrink: 0;
+}
+
+.p30 .focus-icon { background: var(--teal3); }
+.p60 .focus-icon { background: var(--gold3); }
+.p90 .focus-icon { background: #EAF3EC; }
+
+.focus-area-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+.focus-area-subtitle {
+  font-size: 12px;
+  color: var(--muted);
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 0.06em;
+  margin-top: 1px;
+}
+
+/* ── TASK CARDS ─────────────────────────────────────────────── */
+.task-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.task-grid.wide { grid-template-columns: 1fr; }
+
+.task-card {
+  background: var(--cream);
+  border-radius: 10px;
+  padding: 22px 24px;
+  border: 1px solid var(--border);
+  position: relative;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.task-card:hover {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+  transform: translateY(-1px);
+}
+
+.alt .task-card { background: var(--cream); }
+
+.task-card.critical {
+  border-color: transparent;
+}
+
+.p30 .task-card.critical { background: var(--teal3); border-color: rgba(28,122,140,0.25); }
+.p60 .task-card.critical { background: var(--gold3); border-color: rgba(192,125,42,0.25); }
+.p90 .task-card.critical { background: #EAF3EC; border-color: rgba(59,110,74,0.25); }
+
+.task-priority {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.priority-critical { background: rgba(192,57,43,0.1); color: #c0392b; }
+.priority-high     { background: rgba(28,122,140,0.12); color: var(--teal); }
+.priority-medium   { background: rgba(192,125,42,0.12); color: var(--gold); }
+
+.task-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.task-body {
+  font-size: 13.5px;
+  color: #3D5060;
+  line-height: 1.65;
+  margin-bottom: 12px;
+}
+
+.task-actions {
+  list-style: none;
+  margin-top: 10px;
+  border-top: 1px solid rgba(0,0,0,0.06);
+  padding-top: 10px;
+}
+
+.task-actions li {
+  font-size: 13px;
+  color: #4A5E6E;
+  padding: 5px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.5;
+}
+
+.task-actions li::before {
+  content: '→';
+  font-size: 11px;
+  color: var(--muted);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.task-owner-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed rgba(0,0,0,0.08);
+  flex-wrap: wrap;
+}
+
+.owner-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.owner-claude {
+  background: #E8F4FF;
+  color: #1A5FA8;
+  border: 1px solid rgba(26,95,168,0.2);
+}
+.owner-claude::before { content: '✦ '; font-size: 9px; }
+
+.owner-person {
+  background: #FFF0E8;
+  color: #9C4A1A;
+  border: 1px solid rgba(156,74,26,0.2);
+}
+.owner-person::before { content: '👤 '; font-size: 10px; }
+
+.owner-both {
+  background: #EEF0FF;
+  color: #4A4AB8;
+  border: 1px solid rgba(74,74,184,0.2);
+}
+.owner-both::before { content: '◈ '; font-size: 9px; }
+
+.owner-note {
+  font-size: 11px;
+  color: var(--muted);
+  font-style: italic;
+  margin-top: 2px;
+  line-height: 1.4;
+  flex-basis: 100%;
+}
+
+/* ── LEGEND ─────────────────────────────────────────────────── */
+.legend {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 40px 40px;
+}
+
+.legend-inner {
+  background: var(--navy);
+  border-radius: 12px;
+  padding: 24px 32px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.legend-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  margin-right: 8px;
+  white-space: nowrap;
+}
+
+.legend-items {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.7);
+}
+
+.legend-desc {
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+}
+
+/* ── CALLOUT STRIP ──────────────────────────────────────────── */
+.callout-strip {
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin: 36px 0;
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+}
+
+.p30 .callout-strip { background: var(--teal3); border-left: 4px solid var(--teal); }
+.p60 .callout-strip { background: var(--gold3); border-left: 4px solid var(--gold); }
+.p90 .callout-strip { background: #EAF3EC; border-left: 4px solid #3B6E4A; }
+
+.callout-strip-icon { font-size: 22px; flex-shrink: 0; margin-top: 1px; }
+
+.callout-strip-text {
+  font-size: 14.5px;
+  color: var(--navy);
+  line-height: 1.7;
+}
+
+.callout-strip-text strong { font-weight: 600; }
+
+/* ── WEEK TIMELINE ──────────────────────────────────────────── */
+.week-timeline {
+  margin: 20px 0 36px;
+}
+
+.week-row {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 0 24px;
+  position: relative;
+}
+
+.week-row + .week-row { margin-top: 8px; }
+
+.week-label {
+  padding: 14px 0;
+  text-align: right;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  text-transform: uppercase;
+  padding-right: 24px;
+  border-right: 2px solid var(--border);
+  position: relative;
+}
+
+.week-label::after {
+  content: '';
+  position: absolute;
+  right: -5px; top: 50%;
+  transform: translateY(-50%);
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+}
+
+.p30 .week-label.active::after { background: var(--teal); }
+.p60 .week-label.active::after { background: var(--gold); }
+.p90 .week-label.active::after { background: #3B6E4A; }
+.week-label.active { color: var(--text); }
+
+.week-content {
+  padding: 10px 0 10px 0;
+}
+
+.week-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.week-content ul li {
+  font-size: 13.5px;
+  color: #3D5060;
+  padding: 3px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.5;
+}
+
+.week-content ul li::before {
+  content: '·';
+  color: var(--teal);
+  font-weight: 700;
+  flex-shrink: 0;
+  font-size: 18px;
+  line-height: 1.1;
+}
+
+.p60 .week-content ul li::before { color: var(--gold); }
+.p90 .week-content ul li::before { color: #3B6E4A; }
+
+/* ── OUTCOME BOX ────────────────────────────────────────────── */
+.outcomes {
+  background: var(--navy);
+  border-radius: 14px;
+  padding: 32px 36px;
+  margin-top: 44px;
+}
+
+.outcomes-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.p30 .outcomes-title { color: var(--teal2); }
+.p60 .outcomes-title { color: var(--gold2); }
+.p90 .outcomes-title { color: #6DB880; }
+
+.outcomes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.outcome-item {}
+
+.outcome-metric {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px;
+  font-weight: 600;
+  color: white;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.p30 .outcome-metric { color: var(--teal2); }
+.p60 .outcome-metric { color: var(--gold2); }
+.p90 .outcome-metric { color: #6DB880; }
+
+.outcome-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.4;
+}
+
+/* ── SECTION DIVIDER ────────────────────────────────────────── */
+.phase-divider {
+  height: 6px;
+  width: 100%;
+}
+
+.p30-div { background: linear-gradient(90deg, var(--teal) 0%, transparent 100%); }
+.p60-div { background: linear-gradient(90deg, var(--gold) 0%, transparent 100%); }
+.p90-div { background: linear-gradient(90deg, #3B6E4A 0%, transparent 100%); }
+
+/* ── CLOSING ────────────────────────────────────────────────── */
+.closing {
+  background: var(--navy);
+  padding: 72px 40px;
+  text-align: center;
+}
+
+.closing-inner {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.closing h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 4vw, 44px);
+  color: white;
+  margin-bottom: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.closing h2 em { color: var(--gold2); font-style: italic; }
+
+.closing p {
+  color: rgba(255,255,255,0.5);
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: 36px;
+}
+
+.closing-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.chip {
+  padding: 7px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-family: 'DM Mono', monospace;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.55);
+}
+
+/* ── RESPONSIVE ─────────────────────────────────────────────── */
+@media (max-width: 780px) {
+  .phase-summary { grid-template-columns: 1fr; }
+  .task-grid { grid-template-columns: 1fr; }
+  .outcomes-grid { grid-template-columns: 1fr 1fr; }
+  .header-nav { display: none; }
+  .hero { padding: 48px 24px 56px; }
+  .phase-section { padding: 52px 24px; }
+  .week-row { grid-template-columns: 70px 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-brand">
+      <div class="header-logo"><span>NHC</span></div>
+      <span class="header-name">Nurse Health Concierge</span>
+    </div>
+    <nav class="header-nav">
+      <a class="nav-pill d30" href="#day30">Days 1–30</a>
+      <a class="nav-pill d60" href="#day60">Days 31–60</a>
+      <a class="nav-pill d90" href="#day90">Days 61–90</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Execution Roadmap · March – June 2026</div>
+    <h1>30 · 60 · 90<br><em>Day Plan</em></h1>
+    <p class="hero-sub">A step-by-step operational playbook for the first 90 days of NHC's growth — from one client and one advocate to a structured, scalable business with systems, marketing, and a pipeline.</p>
+
+    <div class="phase-summary">
+      <div class="phase-card p30">
+        <div class="phase-card-label">Days 1–30</div>
+        <h3>Build the Foundation</h3>
+        <p>Legal, insurance, financial infrastructure, and brand assets locked in. The business becomes professionally operable, not just operational.</p>
+      </div>
+      <div class="phase-card p60">
+        <div class="phase-card-label">Days 31–60</div>
+        <h3>Build the Pipeline</h3>
+        <p>Advocate #2 recruited. Clients 2 and 3 signed. Shell Point relationship formalized. Sales and referral channels activated.</p>
+      </div>
+      <div class="phase-card p90">
+        <div class="phase-card-label">Days 61–90</div>
+        <h3>Build the Machine</h3>
+        <p>Pat transitions out of the advocate seat. Systems and standards documented. NHC becomes a company that can grow without the founder doing the frontline work.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- LEGEND -->
+<div class="legend">
+  <div class="legend-inner">
+    <span class="legend-label">Task Ownership Key</span>
+    <div class="legend-items">
+      <div class="legend-item">
+        <span class="owner-badge owner-claude">✦ Claude Handles</span>
+        <span class="legend-desc">I build this — ready to use</span>
+      </div>
+      <div class="legend-item">
+        <span class="owner-badge owner-person">Person Required</span>
+        <span class="legend-desc">Needs Pat or family leadership — no substitute</span>
+      </div>
+      <div class="legend-item">
+        <span class="owner-badge owner-both">Claude Drafts · Person Delivers</span>
+        <span class="legend-desc">I write it, you send/present/sign it</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- DAYS 1–30 -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="phase-divider p30-div"></div>
+<section class="phase-section p30" id="day30">
+  <div class="phase-inner">
+
+    <div class="phase-header">
+      <div class="phase-badge p30">
+        <span class="phase-badge-num">30</span>
+        <span class="phase-badge-unit">days</span>
+      </div>
+      <div class="phase-title-block">
+        <div class="phase-eyebrow p30">Phase 1 · April 2026</div>
+        <h2 class="phase-title">Build the Foundation</h2>
+        <p class="phase-desc">Right now NHC has one client and an operational founder. That is proof of concept — but it is not a business. Phase 1 is about converting a working idea into a professionally structured company: legal protection, financial systems, brand assets, and the infrastructure that allows client 2 to be signed without scrambling.</p>
+      </div>
+    </div>
+
+    <div class="callout-strip p30">
+      <div class="callout-strip-icon">⚡</div>
+      <div class="callout-strip-text"><strong>The single most important outcome of Days 1–30:</strong> NHC can legally and professionally onboard a second client. That means a signed engagement agreement, a real invoice, and an insurance policy in place — before client 2 shows up, not after.</div>
+    </div>
+
+    <!-- FOCUS 1: LEGAL -->
+    <div class="focus-area p30">
+      <div class="focus-area-header">
+        <div class="focus-icon p30">⚖️</div>
+        <div>
+          <div class="focus-area-title">Legal Infrastructure</div>
+          <div class="focus-area-subtitle">Priority 1 of 5 — Complete by Day 14</div>
+        </div>
+      </div>
+
+      <div class="task-grid">
+        <div class="task-card critical p30">
+          <div class="task-priority priority-critical">🔴 Critical — Do First</div>
+          <div class="task-title">Engage a Healthcare Attorney</div>
+          <div class="task-body">This is the single highest-leverage action in the entire 90-day plan. Everything else — engagement agreements, advocate contracts, liability scope — flows from this. Do not draft your own agreements. Healthcare advocacy has specific liability nuances in Florida that a general attorney will miss.</div>
+          <ul class="task-actions">
+            <li>Search for Florida attorneys specializing in healthcare law or private nursing practice — not general business law</li>
+            <li>Ask Pat's professional network (FAPHN, FPHA, FGCU advisory board) for referrals to attorneys who have worked with private nurse practitioners or concierge health practices</li>
+            <li>Schedule consultations with 2–3 candidates; ask specifically about experience with 1099 nurse contractor models and health advocacy scope-of-practice in Florida</li>
+            <li>Budget $3,000–$6,000 for initial document drafting; this is not the place to cut costs</li>
+          </ul>
+          <div class="task-owner-row">
+            <span class="owner-badge owner-person">Person Required</span>
+            <span class="owner-note">Pat or family leadership selects and engages the attorney — this is a relationship and judgment call</span>
+          </div>
+        </div>
+
+        <div class="task-card critical p30">
+          <div class="task-priority priority-critical">🔴 Critical — Do First</div>
+          <div class="task-title">Draft the Client Engagement Agreement</div>
+          <div class="task-body">This document defines the commercial relationship, the scope of service, liability boundaries, and termination terms. It protects NHC from scope creep and protects the client from unmet expectations. The current client should be retroactively covered by a signed version of this document.</div>
+          <ul class="task-actions">
+            <li>Work with attorney to define the four critical elements: scope of service (what advocates do and do not do), compensation and payment terms, termination clause (30 days written notice recommended), and liability limitation</li>
+            <li>Include a one-page plain-English "What We Do / What We Don't Do" summary as an attachment — this prevents 80% of future disputes</li>
+            <li>Define what happens when a client has a hospitalization requiring more than 20 hours in a month — establish an overage rate in the agreement ($200/hr recommended)</li>
+            <li>Have the existing client sign the finalized version; frame it as formalizing the relationship professionally</li>
+          </ul>
+          <div class="task-owner-row">
+            <span class="owner-badge owner-both">Claude Drafts · Person Delivers</span>
+            <span class="owner-note">I write the first full draft of the agreement; attorney refines it; Pat signs with the client</span>
+          </div>
+          <div class="task-body">The 1099 model is NHC's operational foundation. The IRS has specific criteria for independent contractor classification, and healthcare adds additional complexity. This agreement must be airtight before Advocate #2 is hired.</div>
+          <ul class="task-actions">
+            <li>Key elements: independent contractor classification justification, $50/hr rate and invoicing process, 5-client maximum, confidentiality and HIPAA compliance obligations, non-disparagement, termination for cause (accepting gifts = immediate), background check consent, professional liability insurance requirement</li>
+            <li>Attorney should review Florida-specific independent contractor law — misclassification risk is real and costly</li>
+            <li>Ensure the agreement does not create an employer-employee relationship by controlling hours, location, or methods (only outcomes and scope)</li>
+          </ul>
+                    <div class="task-owner-row">
+            <span class="owner-badge owner-both">◈ Claude Drafts · Person Delivers</span>
+            <span class="owner-note">I write the first draft; attorney refines and binds; Pat signs</span>
+          </div>
+        </div>
+
+        <div class="task-card p30">
+          <div class="task-priority priority-high">🔵 High</div>
+          <div class="task-title">Define and Document Scope of Practice Boundaries</div>
+          <div class="task-body">The line between "advocacy" and "nursing" will be tested constantly. A written, attorney-reviewed scope definition protects NHC legally and gives advocates a clear framework for saying no when clients push beyond the agreed service.</div>
+          <ul class="task-actions">
+            <li>Document explicitly what NHC advocates DO: attend appointments, ask questions, coordinate communication, manage medication lists, provide family updates, conduct home visits</li>
+            <li>Document explicitly what NHC advocates DO NOT DO: administer medications, perform clinical assessments, provide medical diagnoses or recommendations, act in emergencies beyond calling 911</li>
+            <li>This document becomes part of both the client engagement agreement and the advocate training protocol</li>
+          </ul>
+                    <div class="task-owner-row">
+            <span class="owner-badge owner-both">◈ Claude Drafts · Person Delivers</span>
+            <span class="owner-note">I write the first draft; attorney refines and binds; Pat signs</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOCUS 2: INSURANCE -->
+    <div class="focus-area p30">
+      <div class="focus-area-header">
+        <div class="focus-icon p30">🛡️</div>
+        <div>
+          <div class="focus-area-title">Insurance Coverage</div>
+          <div class="focus-area-subtitle">Priority 2 of 5 — Complete by Day 14</div>
+        </div>
+      </div>
+
+      <div class="task-grid">
+        <div class="task-card critical p30">
+          <div class="task-priority priority-critical">🔴 Critical</div>
+          <div class="task-title">Secure Professional Liability Insurance (E&O)</div>
+          <div class="task-body">Professional liability — also called Errors and Omissions or malpractice insurance — covers NHC if a client claims the service caused harm or failed to deliver. This is non-negotiable before a second client is signed. The existing client creates retroactive liability risk until this is in place.</div>
+          <ul class="task-actions">
+            <li>Contact an insurance broker with healthcare specialty — search specifically for brokers who work with private nursing practices, patient advocates, or case management businesses in Florida</li>
+            <li>Request quotes for both a company policy (covers NHC LLC) and individual advocate policies (required in advocate contracts)</li>
+            <li>Ask about professional liability for health advocacy specifically — some policies exclude "navigation" services; ensure your policy covers the exact activities NHC performs</li>
+            <li>Estimated cost: $2,500–$5,000/year for company policy at this scale; have the attorney review the policy before binding</li>
+            <li>Reference: National Association of Healthcare Advocacy (NAHAC) often has insurance resources and preferred brokers for member advocates</li>
+          </ul>
+                    <div class="task-owner-row">
+            <span class="owner-badge owner-person">👤 Person Required</span>
+            <span class="owner-note">Pat selects broker, binds policy, reviews with attorney</span>
+          </div>
+        </div>
+
+        <div class="task-card p30">
+          <div class="task-priority priority-high">🔵 High</div>
+          <div class="task-title">General Liability + Business Owner's Policy</div>
+          <div class="task-body">Covers bodily injury and property damage during home visits and in-person service delivery. If an advocate is at a client's home and something goes wrong, this protects the company. Bundle with professional liability for efficiency.</div>
+          <ul class="task-actions">
+            <li>Request a Business Owner's Policy (BOP) that combines general liability with property coverage — most small healthcare practices use this structure</li>
+            <li>Confirm that home visit activities are covered (some policies exclude residential settings)</li>
+            <li>Estimated cost: $800–$1,500/year bundled with professional liability</li>
+          </ul>
+                    <div class="task-owner-row">
+            <span class="owner-badge owner-person">👤 Person Required</span>
+            <span class="owner-note">Pat selects broker, binds policy, reviews with attorney</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOCUS 3: FINANCIAL -->
+    <div class="focus-area p30">
+      <div class="focus-area-header">
+        <div class="focus-icon p30">💰</div>
+        <div>
+          <div class="focus-area-title">Financial Systems</div>
+          <div class="focus-area-subtitle">Priority 3 of 5 — Complete by Day 21</div>
+        </div>
+      </div>
+
+      <div class="task-grid">
+        <div class="task-card p30">
+          <div class="task-priority priority-high">🔵 High</div>
+          <div class="task-title">Accounting System Setup</div>
+          <div class="task-body">QuickBooks Online is the recommended platform — it is standard, CPA-compatible, and handles 1099 contractor management cleanly. Set this up before the second invoice is generated. Retroactively enter all existing income and expenses from inception.</div>
+          <ul class="task-actions">
+            <li>Subscribe to QuickBooks Online Simple Start ($30/mo) — sufficient for this stage; upgrade to Essentials ($55/mo) when you have 3+ advocates to manage payments</li>
+            <li>Set up the chart of accounts with NHC-specific categories: Retainer Revenue, Advocate Contractor Payments, Insurance, Legal/Accounting, Marketing, Admin</li>
+            <li>Configure recurring invoice template for the $4,000 monthly retainer — send invoices on the 1st of each month, due within 5 days</li>
+            <li>Set up ACH/bank transfer as the primary payment method — avoid checks for a professional service at this price point</li>
+            <li>Configure for 1099-NEC generation for all advocates at year end (required for any contractor paid $600+ in a year)</li>
+          </ul>
+                    <div class="task-owner-row">
+            <span class="owner-badge owner-both">◈ Claude Drafts · Person Delivers</span>
+            <span class="owner-note">I set up templates and systems; family admin executes and manages</span>
+          </div>
+        </div>
+
+        <div class="task-card p30">
+          <div class="task-priority priority-high">🔵 High</div>
+          <div class="task-title">Engage a CPA</div>
+          <div class="task-body">NHC needs a CPA from Day 1 — not because the finances are complex now, but because the decisions made in Year 1 (LLC taxation election, expense categorization, 1099 structure) have long-term implications. A healthcare-familiar CPA is preferable.</div>
+          <ul class="task-actions">
+            <li>Find a CPA who has experience with LLC healthcare service businesses and 1099 contractor management — ask Pat's existing professional network or the Florida Small Business Development Center</li>
+            <li>Key topics to discuss at first meeting: S-Corp election timing (may be advantageous once revenue exceeds ~$80K), quarterly estimated tax payments, deductible business expenses for a service business, 1099 management protocol</li>
+            <li>Estimated cost: $150–$250/hour; initial setup consultation of 2–3 hours plus annual filing</li>
+          </ul>
+                    <div class="task-owner-row">
+            <span class="owner-badge owner-person">👤 Person Required</span>
+            <span class="owner-note">Strategic decision requiring Pat's judgment</span>
+          </div>
+        </div>
+
+        <div class="task-card p30">
+          <div class="task-priority priority-medium">🟡 Medium</div>
+          <div class="task-title">Build the 5-Year Financial Model</div>
+          <div class="task-body">Three scenarios (conservative, base, stretch) built in a spreadsheet that updates dynamically as you add clients and advocates. This is the document you use to make decisions, not just to show investors.</div>
+          <ul class="task-actions">
+            <li>Conservative: 1 new client per quarter, 1 new advocate per 6 months</li>
+            <li>Base: 2 new clients per quarter, 1 new advocate per quarter after Month 3</li>
+            <li>Stretch: Shell Point referral channel activated, 3+ clients per quarter by Year 2</li>
+            <li>Model should include: gross revenue, advocate costs, overhead, and net to the LLC by month for 5 years</li>
+          </ul>
+                    <div class="task-owner-row">
+            <span class="owner-badge owner-both">◈ Claude Drafts · Person Delivers</span>
+            <span class="owner-note">I build the financial model and templates; CPA validates; Pat approves</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOCUS 4: BRAND -->
+    <div class="focus-area p30">
+      <div class="focus-area-header">
+        <div class="focus-icon p30">📄</div>
+        <div>
+          <div class="focus-area-title">Brand Assets & Marketing Materials</div>
+          <div class="focus-area-subtitle">Priority 4 of 5 — Complete by Day 28</div>
+        </div>
+      </div>
+
+      <div class="task-grid">
+        <div class="task-card p30">
+          <div class="task-priority priority-high">🔵 High</div>
+          <div class="task-title">Two-Page Client Marketing Deck</div>
+          <div class="task-body">The single most important sales tool NHC has right now. This is what Pat hands to a Shell Point resident's daughter when she says "tell me more." It must answer three questions instantly: What is this? Why does my family need it? Why NHC specifically?</div>
+          <ul class="task-actions">
+            <li>Page 1 theme: "Advocacy Defined" — explain health advocacy as a category in plain English. Use the equation: Advocacy = Coordination + Communication + Collaboration + Compassion</li>
+            <li>Page 2 theme: "From Our Family to Yours" — Pat's story, the founding vision, the family commitment. Lead with the human element, not the service features</li>
+            <li>Design for print (full color, 8.5×11, both sides) AND digital PDF (for email attachment)</li>
+            <li>Include a direct contact: Pat's phone number, email, and website. Make the ask explicit: "Call us. The first conversation is free."</li>
+            <li>Tone: warm, credible, relieving. The family reading this should exhale and think "finally someone who understands what we're going through"</li>
+          </ul>
+                    <div class="task-owner-row">
+            <span class="owner-badge owner-claude">✦ Claude Handles</span>
+            <span class="owner-note">I write all copy and design the deck — ready to print</span>
+          </div>
+        </div>
+
+        <div class="task-card p30">
+          <div class="task-priority priority-high">🔵 High</div>
+          <div class="task-title">Two-Page Advocate Recruitment Deck</div>
+          <div class="task-body">The mirror image of the client deck — designed to attract seasoned nurses who are burned out on institutional healthcare and looking for meaningful, flexible work. This is your recruiting document for Advocate #2 and beyond.</div>
+          <ul class="task-actions">
+            <li>Lead with the mission and the emotional appeal: "Your career gave you the expertise. NHC gives you the chance to use it on your own terms — one patient at a time, without the bureaucracy."</li>
+            <li>Be specific on compensation: $50/hour, up to 5 clients, 100 hours/month maximum, $60K/year potential, 1099 flexibility</li>
+            <li>Describe the ideal candidate clearly so self-selection happens before the interview: FL RN preferred, 10+ years experience, retired or semi-retired, strong communicator, high integrity</li>
+            <li>Include the application path: email or phone contact for initial inquiry</li>
+          </ul>
+                    <div class="task-owner-row">
+            <span class="owner-badge owner-claude">✦ Claude Handles</span>
+            <span class="owner-note">I write all copy and design the deck — ready to print</span>
+          </div>
+        </div>
+
+        <div class="task-card p30">
+          <div class="task-priority priority-medium">🟡 Medium</div>
+          <div class="task-title">Website Review & Update</div>
+          <div class="task-body">nhconcierge.com needs to clearly communicate NHC's value proposition within 10 seconds. Most families visiting will be in a moment of stress or research — the site must feel trustworthy, professional, and human immediately.</div>
+          <ul class="task-actions">
+            <li>Audit current site: Does it clearly state what NHC does in the first sentence? Is Pat's bio and credentials prominently featured? Is there a clear phone number and contact path?</li>
+            <li>Add or update: a one-paragraph "What is a Health Advocate?" explainer for category education; the founding story in 3–4 sentences; Pat's full bio and photo; a contact form with name, phone, and a single question ("What is your family's situation?")</li>
+            <li>Add Google Business Profile listing for "Nurse Health Concierge" with Fort Myers / Shell Point geographic targeting</li>
+          </ul>
+                    <div class="task-owner-row">
+            <span class="owner-badge owner-both">◈ Claude Drafts · Person Delivers</span>
+            <span class="owner-note">I write all copy and provide direction; admin/developer implements</span>
+          </div>
+        </div>
+
+        <div class="task-card p30">
+          <div class="task-priority priority-medium">🟡 Medium</div>
+          <div class="task-title">LinkedIn Presence for Pat Dobbins & NHC</div>
+          <div class="task-body">LinkedIn is the single highest-ROI digital channel for reaching both adult children of seniors (the buyers) and experienced nurses (the recruits). It costs nothing and leverages Pat's existing professional reputation.</div>
+          <ul class="task-actions">
+            <li>Update Pat's personal LinkedIn profile: headline should read "Founder & Chairman, Nurse Health Concierge | 45 Years in Healthcare | Elder Advocate" — not "retired nurse"</li>
+            <li>Create an NHC company page on LinkedIn; link from Pat's profile</li>
+            <li>Write a launch post from Pat's profile telling the founding story in Pat's voice — authentic, personal, specific. Aim for 3–5 paragraphs. This single post, if written well, can reach thousands of people in Pat's existing network</li>
+          </ul>
+                    <div class="task-owner-row">
+            <span class="owner-badge owner-both">◈ Claude Drafts · Person Delivers</span>
+            <span class="owner-note">I draft recruitment content and track pipeline; Pat does personal outreach</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOCUS 5: CLIENT EXPERIENCE -->
+    <div class="focus-area p30">
+      <div class="focus-area-header">
+        <div class="focus-icon p30">🤝</div>
+        <div>
+          <div class="focus-area-title">Existing Client Experience</div>
+          <div class="focus-area-subtitle">Priority 5 of 5 — Ongoing</div>
+        </div>
+      </div>
+
+      <div class="task-grid">
+        <div class="task-card p30">
+          <div class="task-priority priority-high">🔵 High</div>
+          <div class="task-title">Document the Service Protocol for Client #1</div>
+          <div class="task-body">Everything Pat is currently doing for the first client — the home visit format, the family update format, the medication chart structure, the appointment attendance process — must be written down. This documentation IS the training manual for Advocate #2. Write it while doing it.</div>
+          <ul class="task-actions">
+            <li>Create a "Client Service Log" template: date, activity type (home visit / phone call / appointment attendance / family update), duration, summary, action items</li>
+            <li>Write a one-page "Weekly Update" email template that Pat fills out after each week with the client — this becomes the standard format all advocates use</li>
+            <li>Document the current client's medication chart format as a template for all future clients</li>
+            <li>Note: this documentation is also your strongest evidence of service quality when the first referral opportunity arrives</li>
+          </ul>
+                    <div class="task-owner-row">
+            <span class="owner-badge owner-person">👤 Person Required</span>
+            <span class="owner-note">Pat must do this personally — no substitute</span>
+          </div>
+        </div>
+
+        <div class="task-card p30">
+          <div class="task-priority priority-medium">🟡 Medium</div>
+          <div class="task-title">Formalize the Client Onboarding Checklist</div>
+          <div class="task-body">What happens in the first two weeks of a new client engagement? This needs to be a written checklist that any new advocate can follow. The goal: the onboarding experience should be consistent and excellent regardless of which advocate delivers it.</div>
+          <ul class="task-actions">
+            <li>Week 1: signed engagement agreement, first invoice sent, introductory family call, initial home visit, complete medication list created, all current providers identified</li>
+            <li>Week 2: first provider communication (introduce NHC, confirm communication preferences), home safety walk-through, family update template sent, next month's appointment schedule mapped</li>
+            <li>This checklist becomes part of the Advocate Training Manual built in Days 61–90</li>
+          </ul>
+                    <div class="task-owner-row">
+            <span class="owner-badge owner-person">👤 Person Required</span>
+            <span class="owner-note">Pat must do this personally — no substitute</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 30-DAY WEEK BREAKDOWN -->
+    <div class="callout-strip p30" style="margin-top: 44px;">
+      <div class="callout-strip-icon">📅</div>
+      <div class="callout-strip-text"><strong>Week-by-Week Breakdown — Days 1–30</strong></div>
+    </div>
+
+    <div class="week-timeline p30">
+      <div class="week-row">
+        <div class="week-label active p30">Week 1</div>
+        <div class="week-content">
+          <ul>
+            <li>Identify and contact 2–3 healthcare attorneys; schedule consultations</li>
+            <li>Contact 2 healthcare insurance brokers; request E&O quotes</li>
+            <li>Subscribe to QuickBooks Online; begin basic setup</li>
+            <li>Retroactively get existing client to sign a preliminary engagement letter (even a simple one-pager) while attorney drafts the full agreement</li>
+          </ul>
+        </div>
+      </div>
+      <div class="week-row">
+        <div class="week-label active p30">Week 2</div>
+        <div class="week-content">
+          <ul>
+            <li>Select and engage healthcare attorney; provide them with existing client relationship context and the NHC service model</li>
+            <li>Select insurance broker; bind professional liability policy</li>
+            <li>Attorney begins drafting client engagement agreement and advocate contractor agreement</li>
+            <li>Update Pat's LinkedIn profile; create NHC company LinkedIn page</li>
+            <li>Begin writing the two-page client marketing deck copy</li>
+          </ul>
+        </div>
+      </div>
+      <div class="week-row">
+        <div class="week-label active p30">Week 3</div>
+        <div class="week-content">
+          <ul>
+            <li>Review and finalize engagement agreement with attorney (round 1)</li>
+            <li>Set up QuickBooks chart of accounts; enter all existing financial data</li>
+            <li>Engage CPA; first consultation on tax structure and 1099 management</li>
+            <li>Finalize marketing deck design; send to printer (order 50 copies minimum)</li>
+            <li>Begin documenting Client #1 service protocol and weekly update template</li>
+          </ul>
+        </div>
+      </div>
+      <div class="week-row">
+        <div class="week-label active p30">Week 4</div>
+        <div class="week-content">
+          <ul>
+            <li>Finalized engagement agreement signed with existing client</li>
+            <li>Advocate contractor agreement finalized by attorney</li>
+            <li>Website audit completed; updates implemented</li>
+            <li>LinkedIn launch post published by Pat</li>
+            <li>Begin advocate recruitment outreach — identify first 3 candidates from Pat's network</li>
+            <li>Print marketing decks received; 10 copies ready for Shell Point outreach</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 30-DAY OUTCOMES -->
+    <div class="outcomes p30">
+      <div class="outcomes-title">Day 30 — What Success Looks Like</div>
+      <div class="outcomes-grid">
+        <div class="outcome-item">
+          <div class="outcome-metric p30">100%</div>
+          <div class="outcome-label">Legal documents drafted and in review — engagement agreement, contractor agreement, scope definition</div>
+        </div>
+        <div class="outcome-item">
+          <div class="outcome-metric p30">Bound</div>
+          <div class="outcome-label">Professional liability insurance policy active — NHC is legally protected before client 2 signs</div>
+        </div>
+        <div class="outcome-item">
+          <div class="outcome-metric p30">3</div>
+          <div class="outcome-label">Advocate candidates identified from Pat's network — ready to interview in Days 31–60</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- DAYS 31–60 -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="phase-divider p60-div"></div>
+<section class="phase-section p60 alt" id="day60">
+  <div class="phase-inner">
+
+    <div class="phase-header">
+      <div class="phase-badge p60">
+        <span class="phase-badge-num">60</span>
+        <span class="phase-badge-unit">days</span>
+      </div>
+      <div class="phase-title-block">
+        <div class="phase-eyebrow p60">Phase 2 · May 2026</div>
+        <h2 class="phase-title">Build the Pipeline</h2>
+        <p class="phase-desc">The foundation is in place. Now the work shifts from infrastructure to growth. Days 31–60 are about activating the Shell Point relationship, signing clients 2 and 3, recruiting and onboarding Advocate #2, and establishing the referral channels that will drive growth beyond Pat's personal network.</p>
+      </div>
+    </div>
+
+    <div class="callout-strip p60">
+      <div class="callout-strip-icon">🎯</div>
+      <div class="callout-strip-text"><strong>The single most important outcome of Days 31–60:</strong> Advocate #2 is recruited, contracted, and assigned to a paying client. This is the moment NHC becomes a company — not a solo practice. Until a second advocate is carrying a client independently, every other growth initiative is theoretical.</div>
+    </div>
+
+    <!-- FOCUS: ADVOCATE RECRUITMENT -->
+    <div class="focus-area p60">
+      <div class="focus-area-header">
+        <div class="focus-icon p60">👩‍⚕️</div>
+        <div>
+          <div class="focus-area-title">Advocate Recruitment & Onboarding</div>
+          <div class="focus-area-subtitle">Priority 1 of 4 — The Revenue Multiplier</div>
+        </div>
+      </div>
+
+      <div class="task-grid">
+        <div class="task-card critical p60">
+          <div class="task-priority priority-critical">🔴 Critical</div>
+          <div class="task-title">Interview and Select Advocate #2</div>
+          <div class="task-body">Approach this hire with the same rigor you would use to choose a business partner — because in a trust-based service like this, a bad advocate can permanently damage the brand. Pat's intuition about character is the most important filter. Credentials matter; integrity matters more.</div>
+          <ul class="task-actions">
+            <li>Conduct structured interviews with the 3 candidates identified in Days 1–30; use a consistent set of scenario questions, not just a resume review</li>
+            <li>Key interview questions: "Describe a time when a patient's family member was unreasonable — how did you handle it?" / "How would you tell a family something they didn't want to hear?" / "What would you do if a client asked you to stay an extra hour beyond your agreed scope?"</li>
+            <li>Conduct a 2-hour shadow day: have each finalist spend time with Pat and the existing client (with client's consent) to assess fit, communication style, and instinct</li>
+            <li>Run a background check on the selected candidate — minimum: criminal, sex offender registry, FL nursing license verification (if applicable), professional reference checks (2 minimum)</li>
+            <li>Trust Pat's gut above all qualifications — the people doing this work will be alone in seniors' homes. Character is the credential that matters most.</li>
+          </ul>
+                    <div class="task-owner-row">
+            <span class="owner-badge owner-person">👤 Person Required</span>
+            <span class="owner-note">Pat must conduct all interviews — character assessment is her call alone</span>
+          </div>
+        </div>
+
+        <div class="task-card p60">
+          <div class="task-priority priority-critical">🔴 Critical</div>
+          <div class="task-title">Execute Advocate Contractor Agreement</div>
+          <div class="task-body">The attorney-drafted contractor agreement from Days 1–30 gets signed before Advocate #2 attends a single client meeting. No exceptions. This protects NHC, the client, and the advocate.</div>
+          <ul class="task-actions">
+            <li>Walk the new advocate through every clause personally — do not just email and request a signature. Understanding the scope boundaries is critical, especially the "no gifts" policy and the documentation requirements</li>
+            <li>Confirm the advocate has or will secure personal professional liability insurance (as required by the contract)</li>
+            <li>Set up the advocate in QuickBooks as a vendor for 1099 tracking; confirm their W-9 is on file</li>
+            <li>Establish the weekly check-in protocol: every advocate checks in with Pat weekly per active client — this is non-negotiable and must begin with the very first client assignment</li>
+          </ul>
+                    <div class="task-owner-row">
+            <span class="owner-badge owner-both">◈ Claude Drafts · Person Delivers</span>
+            <span class="owner-note">I draft the agreement; attorney finalizes; Pat executes with advocate</span>
+          </div>
+        </div>
+
+        <div class="task-card p60">
+          <div class="task-priority priority-high">🔵 High</div>
+          <div class="task-title">Conduct Structured Onboarding Training — 3 Days</div>
+          <div class="task-body">The onboarding is not HR paperwork. It is a 3-day immersive orientation to the NHC way of doing things. Pat is both the trainer and the standard. The goal: Advocate #2 can walk into a client's home and perform the role exactly as Pat would.</div>
+          <ul class="task-actions">
+            <li>Day 1: NHC mission, values, and founding story. Complete review of engagement agreement and scope of practice. Walk through the client onboarding checklist step by step. Review and practice the medication chart documentation process.</li>
+            <li>Day 2: Communication standards. Practice the family update email template with a fictional scenario. Role-play a provider appointment — how to introduce yourself, what questions to ask, how to document. Practice the home safety walk-through checklist.</li>
+            <li>Day 3: Shadow Pat on a real client visit (with existing client's written consent). Debrief on what was observed. Review the weekly reporting cadence with NHC leadership. Q&A. Sign-off on readiness.</li>
+          </ul>
+                    <div class="task-owner-row">
+            <span class="owner-badge owner-person">👤 Person Required</span>
+            <span class="owner-note">Pat is the standard — training must come from her directly</span>
+          </div>
+        </div>
+
+        <div class="task-card p60">
+          <div class="task-priority priority-high">🔵 High</div>
+          <div class="task-title">Begin Broad Advocate Pipeline for Future Hires</div>
+          <div class="task-body">Hiring Advocate #2 solves today's capacity problem. The pipeline for Advocates #3 and #4 needs to start now so NHC is never forced to take a bad hire because there's no alternative. Build the pipeline before you need it.</div>
+          <ul class="task-actions">
+            <li>Post the advocate recruitment deck on LinkedIn as a company update and as a post from Pat's personal profile — "We're looking for experienced nurses who want to do meaningful work on their own terms"</li>
+            <li>Contact the alumni network at Florida Gulf Coast University School of Nursing — Pat is on the advisory board, which is a significant advantage</li>
+            <li>Reach out to Florida Association of Public Health Nurses (FAPHN) to post a recruitment notice in their newsletter or member communications</li>
+            <li>Create a simple Google Form for advocate interest inquiries — first name, credentials, years of experience, geographic area, and one question: "Why are you interested in health advocacy work?"</li>
+          </ul>
+                    <div class="task-owner-row">
+            <span class="owner-badge owner-both">◈ Claude Drafts · Person Delivers</span>
+            <span class="owner-note">I draft recruitment content and track pipeline; Pat does personal outreach</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOCUS: CLIENT ACQUISITION -->
+    <div class="focus-area p60">
+      <div class="focus-area-header">
+        <div class="focus-icon p60">📋</div>
+        <div>
+          <div class="focus-area-title">Client Acquisition — Shell Point Strategy</div>
+          <div class="focus-area-subtitle">Priority 2 of 4 — Sign Clients 2 and 3</div>
+        </div>
+      </div>
+
+      <div class="task-grid">
+        <div class="task-card critical p60">
+          <div class="task-priority priority-critical">🔴 Critical</div>
+          <div class="task-title">Activate Pat's Shell Point Relationships</div>
+          <div class="task-body">Pat's personal relationships at Shell Point are NHC's single most valuable near-term asset. These relationships are warm — they just need to be explicitly converted into a professional referral understanding. This is not selling. This is informing people Pat already knows that NHC exists and is available.</div>
+          <ul class="task-actions">
+            <li>Make a list of every Shell Point contact Pat has: staff, residents, family members, administrators, healthcare personnel, activity directors. Prioritize by who is most likely to encounter families in a healthcare crisis</li>
+            <li>Schedule personal conversations (in-person preferred, phone acceptable) with the Shell Point Health Services Director and Social Work department — these are the highest-value referral sources in the building</li>
+            <li>Leave printed client marketing decks with each key contact; keep the ask simple: "If a resident's family is overwhelmed by a healthcare situation, we'd love to be the first call you suggest"</li>
+            <li>Do NOT ask Shell Point to formally endorse NHC at this stage — just ask to be a resource they can refer. Formal endorsement conversations happen after 2–3 successful client outcomes within the community</li>
+          </ul>
+                    <div class="task-owner-row">
+            <span class="owner-badge owner-person">👤 Person Required</span>
+            <span class="owner-note">Pat's personal relationships are the asset — only she can activate them</span>
+          </div>
+        </div>
+
+        <div class="task-card p60">
+          <div class="task-priority priority-high">🔵 High</div>
+          <div class="task-title">Convert Inbound Inquiries — Discovery Process</div>
+          <div class="task-body">Every inquiry NHC receives at this stage deserves Pat's personal response within 24 hours. The first conversation is the most important moment in the sales process — it is where trust is established or lost. Speed of response signals the quality of the service itself.</div>
+          <ul class="task-actions">
+            <li>Establish a standard discovery call framework: start by asking the family to describe the situation in their own words — listen for 10 minutes before explaining anything about NHC</li>
+            <li>Identify the primary emotional need: is it peace of mind? Information? Coordination? Identify the specific problem before proposing the solution</li>
+            <li>If the fit is right, offer an in-person consultation at the community or the client's home — this visit alone often converts, because Pat's presence and expertise is self-evident</li>
+            <li>Track all inquiries: date, source, family name, situation, outcome. Even at 2–3 inquiries per month, this data is invaluable for understanding what messages are working</li>
+          </ul>
+                    <div class="task-owner-row">
+            <span class="owner-badge owner-person">👤 Person Required</span>
+            <span class="owner-note">The first conversation closes the sale — Pat must be on every discovery call</span>
+          </div>
+        </div>
+
+        <div class="task-card p60">
+          <div class="task-priority priority-high">🔵 High</div>
+          <div class="task-title">Develop the Client Onboarding Application Form</div>
+          <div class="task-body">A structured intake form that collects the essential information needed to begin an engagement: client health history, current providers, medications, family contacts, and service preferences. This form serves double duty — it gathers information AND signals to the family that NHC is a professional operation.</div>
+          <ul class="task-actions">
+            <li>Include: client demographics, primary diagnosis/conditions, all current medications (name, dose, prescribing provider), all current providers with contact information, emergency contacts, insurance information (for reference, not billing), family communication preferences (who gets updates, how often, in what format)</li>
+            <li>Add a HIPAA authorization form allowing the advocate to communicate with the client's providers on their behalf — attorney should draft or review this</li>
+            <li>Create both a print version (for in-home completion) and a digital version (PDF fillable or simple Google Form) for families who prefer to complete it before the first visit</li>
+          </ul>
+                    <div class="task-owner-row">
+            <span class="owner-badge owner-both">◈ Claude Drafts · Person Delivers</span>
+            <span class="owner-note">I write the form; attorney reviews HIPAA section; Pat delivers to clients</span>
+          </div>
+        </div>
+
+        <div class="task-card p60">
+          <div class="task-priority priority-medium">🟡 Medium</div>
+          <div class="task-title">Outreach to Hospital Discharge Planners</div>
+          <div class="task-body">Families in the highest state of need and urgency are those with a parent being discharged from a hospital with no clear plan. Discharge planners at Lee Memorial Hospital and Gulf Coast Medical Center in Fort Myers are gatekeepers to exactly this population.</div>
+          <ul class="task-actions">
+            <li>Contact the Director of Case Management or Social Work at Lee Memorial (a Lee Health facility) and Gulf Coast Medical Center — request a brief informational meeting to introduce NHC</li>
+            <li>Frame the value for discharge planners: NHC is a resource they can offer to families who need post-discharge coordination beyond what hospital staff can provide</li>
+            <li>Leave marketing decks; ask to be listed in their community resource directory if one exists</li>
+            <li>Follow up monthly until a relationship is established — these relationships take time but produce high-urgency, highly motivated referrals</li>
+          </ul>
+                    <div class="task-owner-row">
+            <span class="owner-badge owner-both">◈ Claude Drafts · Person Delivers</span>
+            <span class="owner-note">I draft intro letters and talking points; family admin schedules; Pat attends</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOCUS: SYSTEMS -->
+    <div class="focus-area p60">
+      <div class="focus-area-header">
+        <div class="focus-icon p60">⚙️</div>
+        <div>
+          <div class="focus-area-title">Operational Systems</div>
+          <div class="focus-area-subtitle">Priority 3 of 4 — Build Before You Need Them</div>
+        </div>
+      </div>
+
+      <div class="task-grid">
+        <div class="task-card p60">
+          <div class="task-priority priority-high">🔵 High</div>
+          <div class="task-title">Implement a Simple CRM System</div>
+          <div class="task-body">At 1–2 clients, Pat can hold everything in her head. At 5–10 clients across 2–3 advocates, that is impossible. A CRM (Customer Relationship Management system) tracks every client, prospect, referral, and advocate interaction. Start simple; upgrade later.</div>
+          <ul class="task-actions">
+            <li>For this stage: HubSpot CRM Free is sufficient and excellent — it tracks contacts, deals (prospects), and activity log. No cost. 30-minute setup.</li>
+            <li>Set up three pipelines: Prospect Clients (inquiry → consultation → proposal → signed), Active Clients (onboarding → active service → renewal), Advocate Candidates (interested → interviewed → contracted → active)</li>
+            <li>Log every inquiry, every conversation, every follow-up. The goal is that if Pat is unavailable, a family member running NHC administration can see every active thread</li>
+          </ul>
+                    <div class="task-owner-row">
+            <span class="owner-badge owner-claude">✦ Claude Handles</span>
+            <span class="owner-note">I can set up HubSpot pipelines and document the CRM structure — admin maintains it</span>
+          </div>
+        </div>
+
+        <div class="task-card p60">
+          <div class="task-priority priority-high">🔵 High</div>
+          <div class="task-title">Create the Weekly Reporting System</div>
+          <div class="task-body">Every active client gets a weekly written update from their advocate. Every advocate files a weekly summary with NHC leadership. This is both a service standard and a quality control mechanism — it creates accountability and gives NHC visibility into every active engagement.</div>
+          <ul class="task-actions">
+            <li>Design the client-facing weekly update template: 1 page maximum, plain English, covers — this week's activities, any provider communications, medication notes, next week's scheduled activities, and one "observation" (something the advocate noticed about the client's wellbeing or situation)</li>
+            <li>Design the internal advocate report template: client name, hours used this week/month, any concerns or escalations, upcoming appointments, family communication log</li>
+            <li>Decide the delivery day: Friday reports work well — families can read over the weekend, and advocates complete them at the end of the work week</li>
+            <li>Store all reports in a shared Google Drive folder organized by client — this becomes the client's ongoing record of care</li>
+          </ul>
+                    <div class="task-owner-row">
+            <span class="owner-badge owner-claude">✦ Claude Handles</span>
+            <span class="owner-note">I design both templates; Pat approves; advocates use them from Day 1</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOCUS: COMPETITION -->
+    <div class="focus-area p60">
+      <div class="focus-area-header">
+        <div class="focus-icon p60">🔍</div>
+        <div>
+          <div class="focus-area-title">Competition Analysis</div>
+          <div class="focus-area-subtitle">Priority 4 of 4 — Know the Landscape</div>
+        </div>
+      </div>
+
+      <div class="task-grid wide">
+        <div class="task-card p60">
+          <div class="task-priority priority-medium">🟡 Medium</div>
+          <div class="task-title">Map the Florida Health Advocacy Competitive Landscape</div>
+          <div class="task-body">NHC needs to know who is already doing this in Florida — especially Southwest Florida. Not to copy them, but to know how to differentiate in marketing language, understand the pricing environment, and identify partnerships vs. competitive threats.</div>
+          <ul class="task-actions">
+            <li>Search the National Association of Healthcare Advocacy (NAHAC) member directory for Florida-based members — this is the professional association for private health advocates and will reveal credentialed competitors</li>
+            <li>Search the Patient Advocate Foundation and Health Advocate directories for Florida-based private pay services</li>
+            <li>Search Google for: "health advocate Fort Myers," "private patient advocate Naples FL," "elder care navigator Southwest Florida," "geriatric care manager Fort Myers" — document the top 10 results with their pricing model, credentials, and positioning</li>
+            <li>For each competitor, document: service model (hourly vs. retainer), price point, target market, credentials, geographic reach, and any notable differentiators</li>
+            <li>Synthesize into a one-page "Competitive Landscape" document: where is NHC clearly differentiated (Pat's credentials, family story, retainer model), where is competition real (pricing, geography), and what messaging gaps exist that NHC can own</li>
+          </ul>
+                    <div class="task-owner-row">
+            <span class="owner-badge owner-both">◈ Claude Drafts · Person Delivers</span>
+            <span class="owner-note">I do the research and write the competitive analysis; team reviews and approves</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 60-DAY WEEK BREAKDOWN -->
+    <div class="callout-strip p60" style="margin-top: 44px;">
+      <div class="callout-strip-icon">📅</div>
+      <div class="callout-strip-text"><strong>Week-by-Week Breakdown — Days 31–60</strong></div>
+    </div>
+
+    <div class="week-timeline p60">
+      <div class="week-row">
+        <div class="week-label active p60">Week 5</div>
+        <div class="week-content p60">
+          <ul>
+            <li>Begin advocate candidate interviews — schedule shadow day with top candidate</li>
+            <li>Schedule personal outreach visits to Pat's top 5 Shell Point contacts</li>
+            <li>Launch CRM (HubSpot Free) — set up pipelines and log all existing contacts and prospects</li>
+            <li>Begin competition landscape research</li>
+          </ul>
+        </div>
+      </div>
+      <div class="week-row">
+        <div class="week-label active p60">Week 6</div>
+        <div class="week-content p60">
+          <ul>
+            <li>Select Advocate #2; run background check and professional references</li>
+            <li>In-person meetings with Shell Point Health Services and Social Work — leave marketing decks</li>
+            <li>Contact Lee Memorial and Gulf Coast Medical Center discharge planning departments to schedule meetings</li>
+            <li>Finalize and deploy client onboarding application form (print + PDF)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="week-row">
+        <div class="week-label active p60">Week 7</div>
+        <div class="week-content p60">
+          <ul>
+            <li>Advocate #2 signs contractor agreement; NHC adds to QuickBooks as vendor</li>
+            <li>Conduct Day 1 and Day 2 of structured advocate onboarding training</li>
+            <li>Competition analysis first draft completed and reviewed</li>
+            <li>Advocate recruitment LinkedIn post and FGCU nursing alumni outreach published</li>
+          </ul>
+        </div>
+      </div>
+      <div class="week-row">
+        <div class="week-label active p60">Week 8</div>
+        <div class="week-content p60">
+          <ul>
+            <li>Advocate #2 completes Day 3 training — shadow visit with existing client</li>
+            <li>Assign first client to Advocate #2; Pat supervises first two weeks closely</li>
+            <li>Weekly reporting system live — advocate files first internal report</li>
+            <li>First hospital discharge planner meetings scheduled and attended</li>
+            <li>Client 2 signed (target) — Advocate #2 begins onboarding protocol</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 60-DAY OUTCOMES -->
+    <div class="outcomes p60">
+      <div class="outcomes-title">Day 60 — What Success Looks Like</div>
+      <div class="outcomes-grid">
+        <div class="outcome-item">
+          <div class="outcome-metric p60">2</div>
+          <div class="outcome-label">Advocates under contract — Pat and Advocate #2 both actively serving clients</div>
+        </div>
+        <div class="outcome-item">
+          <div class="outcome-metric p60">2–3</div>
+          <div class="outcome-label">Active paying clients — $8,000–$12,000 in monthly recurring revenue</div>
+        </div>
+        <div class="outcome-item">
+          <div class="outcome-metric p60">Live</div>
+          <div class="outcome-label">CRM, reporting system, and onboarding application all operational and in use</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- DAYS 61–90 -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="phase-divider p90-div"></div>
+<section class="phase-section p90" id="day90">
+  <div class="phase-inner">
+
+    <div class="phase-header">
+      <div class="phase-badge p90">
+        <span class="phase-badge-num">90</span>
+        <span class="phase-badge-unit">days</span>
+      </div>
+      <div class="phase-title-block">
+        <div class="phase-eyebrow p90">Phase 3 · June 2026</div>
+        <h2 class="phase-title">Build the Machine</h2>
+        <p class="phase-desc">The final phase is about making NHC structurally independent from Pat's daily involvement. Systems are documented. Advocates work independently. The referral pipeline is generating inbound inquiries. Pat's role shifts from doing the work to leading the company that does the work.</p>
+      </div>
+    </div>
+
+    <div class="callout-strip p90">
+      <div class="callout-strip-icon">🏗️</div>
+      <div class="callout-strip-text"><strong>The single most important outcome of Days 61–90:</strong> Pat Dobbins transitions out of the active advocate role. She becomes the Chairman and quality guarantor — not the person doing weekly home visits. This transition is what converts NHC from a personal practice into a scalable company. It is the hardest and most important thing on this entire 90-day plan.</div>
+    </div>
+
+    <!-- FOCUS: PAT'S TRANSITION -->
+    <div class="focus-area p90">
+      <div class="focus-area-header">
+        <div class="focus-icon p90">🔄</div>
+        <div>
+          <div class="focus-area-title">Pat's Role Transition</div>
+          <div class="focus-area-subtitle">Priority 1 of 4 — The Scaling Unlock</div>
+        </div>
+      </div>
+
+      <div class="task-grid">
+        <div class="task-card critical p90">
+          <div class="task-priority priority-critical">🔴 Critical</div>
+          <div class="task-title">Transition Client #1 to Advocate #2 or #3</div>
+          <div class="task-body">The existing client who Pat personally onboarded is the hardest transition — they know Pat, trust Pat, and may resist a change. Done well, this transition demonstrates NHC's system quality. Done poorly, it risks losing the client. The key is a warm handoff with Pat remaining visibly involved in an oversight capacity.</div>
+          <ul class="task-actions">
+            <li>Have a direct conversation with the client and family — frame this as "growth" and a vote of confidence, not an abandonment. Pat will still be available for oversight and escalation; the day-to-day advocate is changing</li>
+            <li>Introduce the new advocate in person, with Pat present, at least two weeks before the transition date — this is non-negotiable</li>
+            <li>Overlap period: both Pat and the new advocate attend 2 home visits together before Pat steps back</li>
+            <li>Pat remains available to the client family via phone for the first 30 days post-transition — make this explicit in the family communication</li>
+            <li>Check in with the family 2 weeks and 4 weeks after transition to confirm satisfaction</li>
+          </ul>
+                    <div class="task-owner-row">
+            <span class="owner-badge owner-person">👤 Person Required</span>
+            <span class="owner-note">This transition requires Pat's personal presence and relationship — no delegation</span>
+          </div>
+        </div>
+
+        <div class="task-card p90">
+          <div class="task-priority priority-high">🔵 High</div>
+          <div class="task-title">Define Pat's New Role — Chairman & Quality Director</div>
+          <div class="task-body">Pat's new job description has three components: brand ambassador (speaking, community presence, referral relationship building), quality director (reviewing advocate performance, handling escalations, approving new clients), and strategic leader (partnerships, growth strategy, financial oversight).</div>
+          <ul class="task-actions">
+            <li>Write a one-page internal role description for Pat's post-transition position — this creates clarity for the family team about what Pat owns and what is delegated</li>
+            <li>Block Pat's calendar for 3 weekly priorities: (1) advocate check-in calls, (2) Shell Point community relationship time, (3) prospective client consultation calls</li>
+            <li>Identify which administrative tasks Pat was handling as an advocate that need to be systematized or delegated: family communications, billing, scheduling, documentation</li>
+            <li>Hire a part-time virtual assistant or family member as the operations coordinator if administrative load is significant — this frees Pat for the high-value activities only she can do</li>
+          </ul>
+                    <div class="task-owner-row">
+            <span class="owner-badge owner-person">👤 Person Required</span>
+            <span class="owner-note">Strategic leadership decisions only Pat and family can make</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOCUS: TRAINING MANUAL -->
+    <div class="focus-area p90">
+      <div class="focus-area-header">
+        <div class="focus-icon p90">📖</div>
+        <div>
+          <div class="focus-area-title">Advocate Training Manual</div>
+          <div class="focus-area-subtitle">Priority 2 of 4 — The Quality Guarantee</div>
+        </div>
+      </div>
+
+      <div class="task-grid">
+        <div class="task-card p90">
+          <div class="task-priority priority-high">🔵 High</div>
+          <div class="task-title">Write the Complete NHC Advocate Training Manual</div>
+          <div class="task-body">This document is NHC's most important operational asset. It is what makes every advocate perform like Pat. It is the reason a client in Year 3 has the same experience as the first client. Without it, quality is dependent on the person — with it, quality is built into the system.</div>
+          <ul class="task-actions">
+            <li>Section 1 — NHC Mission & Values: Why we exist, what we believe, what we will never compromise. The three non-negotiables: client interests first, no gifts ever, scope of practice is absolute</li>
+            <li>Section 2 — The NHC Service Standard: Complete description of every service component — home visit protocol, medication chart process, appointment attendance guidelines, family update format, provider communication standards</li>
+            <li>Section 3 — Client Onboarding: Step-by-step onboarding checklist. Week 1 and Week 2 protocols. The HIPAA authorization process. How to conduct the initial home safety assessment</li>
+            <li>Section 4 — Communication Standards: Weekly update template with examples. How to communicate bad news to a family. How to handle a family member who disagrees with the provider's recommendation. Escalation protocol — what to do and who to call when a situation exceeds the advocate's scope</li>
+            <li>Section 5 — Scope of Practice: What advocates do and do not do. Specific scenarios with correct responses. What constitutes immediate grounds for dismissal</li>
+            <li>Section 6 — Documentation & Reporting: Internal reporting template. How to maintain the client service log. Confidentiality and records retention requirements</li>
+            <li>Section 7 — NHC Administrative Procedures: Invoicing process (advocate's monthly invoice to NHC), check-in schedule with NHC leadership, performance review process</li>
+          </ul>
+                    <div class="task-owner-row">
+            <span class="owner-badge owner-both">◈ Claude Drafts · Person Delivers</span>
+            <span class="owner-note">I draft all seven sections in Pat's voice; Pat reviews, edits, and owns every word</span>
+          </div>
+        </div>
+
+        <div class="task-card p90">
+          <div class="task-priority priority-medium">🟡 Medium</div>
+          <div class="task-title">Conduct First Formal Quality Reviews</div>
+          <div class="task-body">By Day 90, Advocate #2 has been actively serving clients for 4–6 weeks. A formal quality review — structured, documented, and constructive — establishes the performance management culture from the start. Everyone benefits from explicit feedback; don't assume good work is good enough without checking.</div>
+          <ul class="task-actions">
+            <li>Review all weekly reports filed by Advocate #2 — look for completeness, communication quality, and any patterns in what's being noticed or missed</li>
+            <li>Call the client family served by Advocate #2 — a 10-minute check-in with a simple question: "Is there anything we could be doing better for your family?" This is the most valuable quality data NHC has</li>
+            <li>Conduct a 45-minute structured review session with Advocate #2: what's working well, what has been challenging, any scope or boundary situations that arose, Pat's specific observations and suggestions</li>
+            <li>Document the review and have the advocate sign off — this creates a professional development record and demonstrates NHC's commitment to quality</li>
+          </ul>
+                    <div class="task-owner-row">
+            <span class="owner-badge owner-person">👤 Person Required</span>
+            <span class="owner-note">Pat must do this personally — no substitute</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOCUS: REFERRAL ENGINE -->
+    <div class="focus-area p90">
+      <div class="focus-area-header">
+        <div class="focus-icon p90">🌐</div>
+        <div>
+          <div class="focus-area-title">Referral Engine & Channel Development</div>
+          <div class="focus-area-subtitle">Priority 3 of 4 — Build the Growth Flywheel</div>
+        </div>
+      </div>
+
+      <div class="task-grid">
+        <div class="task-card p90">
+          <div class="task-priority priority-high">🔵 High</div>
+          <div class="task-title">Formalize the Shell Point Referral Relationship</div>
+          <div class="task-body">By Day 90, NHC should have one or more clients within Shell Point, Pat has had multiple meetings with community staff, and the trust foundation exists to have a more formal conversation about NHC's role as a preferred resource for the community.</div>
+          <ul class="task-actions">
+            <li>Request a formal meeting with Shell Point's Director of Resident Services or equivalent — come prepared with a one-page overview of NHC, client outcomes (even 1–2 client stories without names), and a proposed referral framework</li>
+            <li>Proposed ask: permission to be listed in Shell Point's community resource guide as a recommended health advocacy service. This is the minimum; do not push for an exclusive arrangement at this stage</li>
+            <li>Offer to do a 30-minute educational presentation for Shell Point residents and their families: "What is a Health Advocate and Do You Need One?" — this builds awareness and trust simultaneously</li>
+            <li>Follow up with written thank-you to every Shell Point contact who has supported NHC — handwritten note from Pat, brief and genuine</li>
+          </ul>
+                    <div class="task-owner-row">
+            <span class="owner-badge owner-person">👤 Person Required</span>
+            <span class="owner-note">These are Pat's relationships — only she can convert them to referral partnerships</span>
+          </div>
+        </div>
+
+        <div class="task-card p90">
+          <div class="task-priority priority-high">🔵 High</div>
+          <div class="task-title">Build the Professional Referral Network</div>
+          <div class="task-body">Beyond Shell Point, there are five categories of professionals in Southwest Florida who regularly encounter families in exactly the situation NHC serves. Building relationships with even 5–10 of these professionals creates a referral engine that generates clients without advertising.</div>
+          <ul class="task-actions">
+            <li>Category 1 — Elder Law Attorneys: Search the Lee County Bar Association for attorneys specializing in elder law and estate planning. Schedule introductory lunches; bring the client marketing deck. These attorneys hear "my parent's health is getting complicated" every week.</li>
+            <li>Category 2 — Geriatric Financial Advisors: Many fee-only financial advisors in Fort Myers and Naples specialize in retirement planning for seniors. They advise on long-term care costs — NHC's service is directly relevant to their clients' planning.</li>
+            <li>Category 3 — Primary Care Physicians: The PCP of a Shell Point resident with a complex care situation is often frustrated by the lack of coordination. A nurse advocate who attends appointments and follows up is a physician's ally. Target 3–5 PCPs who see large numbers of Shell Point patients.</li>
+            <li>Category 4 — Hospital Social Workers: Beyond discharge planners, social workers in the oncology, cardiology, and geriatric departments at Lee Memorial are consistently working with families facing the exact situation NHC addresses.</li>
+            <li>Category 5 — Community Health Fairs and Senior Centers: Lee County Senior Services, the Area Agency on Aging for Southwest Florida, and local senior centers host events where NHC's target demographic gathers. Request a table at 2–3 events in the next 60 days.</li>
+          </ul>
+                    <div class="task-owner-row">
+            <span class="owner-badge owner-both">◈ Claude Drafts · Person Delivers</span>
+            <span class="owner-note">I draft all outreach letters and leave-behind materials; Pat attends meetings; admin schedules</span>
+          </div>
+        </div>
+
+        <div class="task-card p90">
+          <div class="task-priority priority-medium">🟡 Medium</div>
+          <div class="task-title">Create a Client Testimonial Process</div>
+          <div class="task-body">The most powerful marketing NHC has — more than any deck or website — is a real family saying "this changed everything for us." Start collecting these stories now, with the proper consent framework, so they are available for marketing by Month 4.</div>
+          <ul class="task-actions">
+            <li>After 60+ days with an active client, schedule a 15-minute check-in call with the adult child — not to discuss the client's care, but to ask: "What has been the most valuable thing NHC has done for your family?"</li>
+            <li>If the response is positive (it should be), ask permission to share their story (without names, or with names if they're willing) in NHC marketing materials</li>
+            <li>Draft a 2–3 sentence testimonial based on their words; send it to them for approval before using it anywhere</li>
+            <li>Even one authentic testimonial on the NHC website converts more prospects than a dozen feature bullet points</li>
+          </ul>
+                    <div class="task-owner-row">
+            <span class="owner-badge owner-both">◈ Claude Drafts · Person Delivers</span>
+            <span class="owner-note">I draft the testimonial write-up from notes; Pat makes the call; family admin documents</span>
+          </div>
+        </div>
+
+        <div class="task-card p90">
+          <div class="task-priority priority-medium">🟡 Medium</div>
+          <div class="task-title">Begin Content Strategy — LinkedIn & Email</div>
+          <div class="task-body">Pat's expertise, story, and passion for elder advocacy is content that writes itself. Two LinkedIn posts per month and one email newsletter per month — thoughtful, personal, and educational — build NHC's reputation and organic reach more effectively than any paid advertising at this stage.</div>
+          <ul class="task-actions">
+            <li>Content themes: "What I learned from 45 years of nursing that no one tells families"; "The question you should ask at every doctor's appointment"; "What a hospital discharge planner can't do — and who can"; "What I wish every family of an elderly parent knew"</li>
+            <li>Write in Pat's authentic voice — not corporate, not clinical. Personal, direct, and warm. Pat's voice IS the brand at this stage.</li>
+            <li>Two LinkedIn posts per month (one personal story, one practical tip for families); one email newsletter per quarter to the NHC list (start building the email list via the website contact form from Day 1)</li>
+            <li>Do not outsource this to a generic copywriter. Have a family member assist Pat in turning her spoken thoughts into written content — interview Pat on the phone, transcribe, polish. This preserves authenticity.</li>
+          </ul>
+                    <div class="task-owner-row">
+            <span class="owner-badge owner-both">◈ Claude Drafts · Person Delivers</span>
+            <span class="owner-note">I write all LinkedIn posts and newsletter content in Pat's voice; Pat approves; admin publishes</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOCUS: FINANCIAL REVIEW -->
+    <div class="focus-area p90">
+      <div class="focus-area-header">
+        <div class="focus-icon p90">📊</div>
+        <div>
+          <div class="focus-area-title">90-Day Financial & Strategy Review</div>
+          <div class="focus-area-subtitle">Priority 4 of 4 — Measure, Adjust, Plan Forward</div>
+        </div>
+      </div>
+
+      <div class="task-grid">
+        <div class="task-card p90">
+          <div class="task-priority priority-high">🔵 High</div>
+          <div class="task-title">90-Day Business Review</div>
+          <div class="task-body">At Day 90, NHC has real data — real clients, real costs, real referral sources, real conversion experiences. This review is about using that data to make better decisions for the next 90 days than were made in the first 90.</div>
+          <ul class="task-actions">
+            <li>Revenue: What is actual monthly recurring revenue at Day 90 vs. the plan? What is the trend line?</li>
+            <li>Clients: What was the source of each signed client? What is the average time from first inquiry to signed agreement? What inquiries did not convert and why?</li>
+            <li>Advocates: Is $50/hr competitive? Is the 1099 model working as expected? What is the advocate's experience of the role — are there friction points to address?</li>
+            <li>Pricing: Has any prospect objected to the $4,000 price point? Should a tiered service option be explored (e.g., $2,500/month for 10 hours) to expand the addressable market?</li>
+            <li>Next 90 days: Based on the data, set specific targets for Days 91–180: number of clients, number of advocates, referral relationships, and revenue</li>
+          </ul>
+                    <div class="task-owner-row">
+            <span class="owner-badge owner-both">◈ Claude Drafts · Person Delivers</span>
+            <span class="owner-note">I build the review framework and financial analysis; Pat and CPA conduct the actual review</span>
+          </div>
+        </div>
+
+        <div class="task-card p90">
+          <div class="task-priority priority-medium">🟡 Medium</div>
+          <div class="task-title">Plan the Expansion to Second Community</div>
+          <div class="task-body">Shell Point is the beachhead. By Day 90, if NHC has 2–4 clients there, the learnings are transferable to the next community. Moorings Park in Naples or a large Fort Myers community (Cypress Cove, The Arlington) are logical next targets.</div>
+          <ul class="task-actions">
+            <li>Research the top 3 candidate communities for expansion: resident count, CCRC status (independent-to-assisted transition capability), demographic profile, and proximity to existing advocate geography</li>
+            <li>Identify Pat's existing contacts at each community — even one warm introduction is enough to begin</li>
+            <li>Plan the community entry strategy: same playbook as Shell Point — personal relationships first, marketing deck leave-behind, offer to present to residents, no hard sell</li>
+            <li>Determine: does NHC need a third advocate before expanding to a second community, or can existing capacity serve both?</li>
+          </ul>
+                    <div class="task-owner-row">
+            <span class="owner-badge owner-both">◈ Claude Drafts · Person Delivers</span>
+            <span class="owner-note">I research target communities and draft the expansion strategy; Pat approves direction</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 90-DAY WEEK BREAKDOWN -->
+    <div class="callout-strip p90" style="margin-top: 44px;">
+      <div class="callout-strip-icon">📅</div>
+      <div class="callout-strip-text"><strong>Week-by-Week Breakdown — Days 61–90</strong></div>
+    </div>
+
+    <div class="week-timeline p90">
+      <div class="week-row">
+        <div class="week-label active p90">Week 9</div>
+        <div class="week-content p90">
+          <ul>
+            <li>Begin writing Training Manual — Section 1 (Mission & Values) and Section 2 (Service Standard)</li>
+            <li>Start client transition process: introduce new advocate to Client #1 with Pat present</li>
+            <li>Schedule formal Shell Point community resource meeting</li>
+            <li>Begin outreach to 3 elder law attorneys and 2 geriatric financial advisors for introductory meetings</li>
+          </ul>
+        </div>
+      </div>
+      <div class="week-row">
+        <div class="week-label active p90">Week 10</div>
+        <div class="week-content p90">
+          <ul>
+            <li>Training Manual: Sections 3 (Onboarding) and 4 (Communication Standards)</li>
+            <li>Advocate #2 quality review — first formal performance session</li>
+            <li>Shell Point community resource meeting held; NHC listed in community resources</li>
+            <li>First professional referral network meetings (elder law, financial advisors)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="week-row">
+        <div class="week-label active p90">Week 11</div>
+        <div class="week-content p90">
+          <ul>
+            <li>Training Manual: Sections 5 (Scope of Practice), 6 (Documentation), 7 (Admin Procedures) — first full draft complete</li>
+            <li>Client #1 transition to Advocate #2 or #3 complete; Pat steps back to oversight role</li>
+            <li>First client testimonial conversation — call with client #1's family</li>
+            <li>Pat's first LinkedIn content post as part of ongoing content strategy</li>
+            <li>90-day financial review scheduled with CPA</li>
+          </ul>
+        </div>
+      </div>
+      <div class="week-row">
+        <div class="week-label active p90">Week 12</div>
+        <div class="week-content p90">
+          <ul>
+            <li>Training Manual reviewed, refined, printed — NHC's first operational standard document complete</li>
+            <li>90-day business review conducted — revenue, conversion, advocate performance, pricing assessment</li>
+            <li>Days 91–180 plan drafted: specific client targets, advocate hiring plan, second community entry strategy</li>
+            <li>NHC is now a company — not a solo practice. Pat leads. Advocates serve. Systems run.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 90-DAY OUTCOMES -->
+    <div class="outcomes p90">
+      <div class="outcomes-title">Day 90 — What Success Looks Like</div>
+      <div class="outcomes-grid">
+        <div class="outcome-item">
+          <div class="outcome-metric p90">3–5</div>
+          <div class="outcome-label">Active paying clients generating $12,000–$20,000 in monthly recurring revenue</div>
+        </div>
+        <div class="outcome-item">
+          <div class="outcome-metric p90">2</div>
+          <div class="outcome-label">Independent advocates actively serving clients without Pat in the daily service role</div>
+        </div>
+        <div class="outcome-item">
+          <div class="outcome-metric p90">Done</div>
+          <div class="outcome-label">Training manual complete, referral network active, Pat transitioned to Chairman role</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- CLOSING -->
+<section class="closing">
+  <div class="closing-inner">
+    <h2>From <em>idea</em> to company<br>in 90 days.</h2>
+    <p>Day 1 of this plan: NHC has one client and one founder doing everything. Day 90: NHC has a legal foundation, professional insurance, a documented service standard, trained independent advocates, an active referral pipeline, and a founder in the role she was always meant to fill — leading the mission, not just delivering it.</p>
+    <div class="closing-chips">
+      <div class="chip">Client Marketing Deck</div>
+      <div class="chip">Advocate Recruitment Deck</div>
+      <div class="chip">Training Manual</div>
+      <div class="chip">Onboarding Application Forms</div>
+      <div class="chip">Competition Analysis</div>
+      <div class="chip">5-Year Financial Model</div>
+      <div class="chip">Shell Point Community Deck</div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
